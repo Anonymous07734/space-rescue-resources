@@ -2,6 +2,8 @@ from GameFrame import Globals, RoomObject
 from Objects.Laser import Laser
 import pygame
 
+walking = True
+
 class Ship(RoomObject):
     """
     A class for the player's avitar (the Ship)
@@ -19,6 +21,8 @@ class Ship(RoomObject):
         
         # register events
         self.handle_key_events = True
+
+        self.can_shoot = True
         
     def key_pressed(self, key):
         """
@@ -35,7 +39,11 @@ class Ship(RoomObject):
             self.x += 10
         if key[pygame.K_SPACE]:
             self.shoot_laser()
-
+        '''
+        elif key[pygame.K_l]:
+            self.shooting_laser()
+        '''
+            
     def keep_in_room(self):
         """
         Keeps the ship inside the room
@@ -59,7 +67,23 @@ class Ship(RoomObject):
         """
         Shoots a laser from the ship
         """
-        new_laser = Laser(self.room, 
-                          self.x + self.width, 
-                          self.y + self.height/2 - 4)
-        self.room.add_room_object(new_laser)
+        if self.can_shoot:
+            new_laser = Laser(self.room, 
+                            self.x + self.width, 
+                            self.y + self.height/2 - 4)
+            self.room.add_room_object(new_laser)
+            self.can_shoot = False
+            self.set_timer(10,self.reset_shot)
+        
+       ''' 
+    def shooting_laser(self):
+       if walking == True:
+            new_lasers = Laser(self.room, self.x + self.width, self.y + self.height/2 - 4)
+        self.room.add_room_object(new_lasers)
+     '''   
+
+    def reset_shot(self):
+        """
+        Allows ship to shoot again
+        """
+        self.can_shoot = True
