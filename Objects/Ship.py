@@ -39,9 +39,10 @@ class Ship(RoomObject):
             self.x += 10
         if key[pygame.K_SPACE]:
             self.shoot_laser()
-        
         elif key[pygame.K_l]:
             self.shooting_laser()
+        if key[pygame.K_p]:
+            self.room.score.update_score(+100)
     
             
     def keep_in_room(self):
