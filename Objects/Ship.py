@@ -39,10 +39,10 @@ class Ship(RoomObject):
             self.x += 10
         if key[pygame.K_SPACE]:
             self.shoot_laser()
-        '''
+        
         elif key[pygame.K_l]:
             self.shooting_laser()
-        '''
+    
             
     def keep_in_room(self):
         """
@@ -75,12 +75,12 @@ class Ship(RoomObject):
             self.can_shoot = False
             self.set_timer(10,self.reset_shot)
         
-       ''' 
+       
     def shooting_laser(self):
        if walking == True:
             new_lasers = Laser(self.room, self.x + self.width, self.y + self.height/2 - 4)
-        self.room.add_room_object(new_lasers)
-     '''   
+            self.room.add_room_object(new_lasers)
+     
 
     def reset_shot(self):
         """
