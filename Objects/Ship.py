@@ -43,6 +43,7 @@ class Ship(RoomObject):
             self.shooting_laser()
         if key[pygame.K_p]:
             self.room.score.update_score(+99)
+            self.room.bonus_score.play()
     
             
     def keep_in_room(self):
@@ -75,12 +76,14 @@ class Ship(RoomObject):
             self.room.add_room_object(new_laser)
             self.can_shoot = False
             self.set_timer(10,self.reset_shot)
+            self.room.laser.play()
         
        
     def shooting_laser(self):
        if walking == True:
             new_lasers = Laser(self.room, self.x + self.width, self.y + self.height/2 - 4)
             self.room.add_room_object(new_lasers)
+            self.room.laser.play()
      
 
     def reset_shot(self):
